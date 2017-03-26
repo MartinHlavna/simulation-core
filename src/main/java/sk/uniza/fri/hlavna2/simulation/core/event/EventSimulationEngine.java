@@ -23,10 +23,15 @@
  */
 package sk.uniza.fri.hlavna2.simulation.core.event;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sk.uniza.fri.hlavna2.simulation.core.SimulationEngine;
 import sk.uniza.fri.hlavna2.simulation.core.SimulationParameters;
 import sk.uniza.fri.hlavna2.simulation.core.Statistics;
 import sk.uniza.fri.hlavna2.simulation.core.exception.PastTimeException;
+import sk.uniza.fri.hlavna2.simulation.core.listeners.EventListener;
 import sk.uniza.fri.hlavna2.simulation.core.utils.RandomStorage;
 
 /**
@@ -39,20 +44,34 @@ public abstract class EventSimulationEngine implements SimulationEngine {
     private final double maxTime;
     private final EventCalendar timeline;
     private boolean running;
+    private boolean paused;
+    private final List<EventListener> listeners;
+    private SynchronizationEvent syncroEvent;
 
     public EventSimulationEngine(double maxTime) {
         currentTime = 0.0;
         timeline = new DefaultEventCalendar();
         this.maxTime = maxTime;
+        listeners = new LinkedList<>();
     }
 
     @Override
     public void simulate(SimulationParameters parameters, Statistics statistics, RandomStorage randoms) {
         this.running = true;
         while (!timeline.isEmpty() && currentTime < maxTime && running) {
-            Event currentEvent = timeline.nextEvent();
-            currentTime = currentEvent.getTime();
-            currentEvent.execute(parameters, statistics, randoms);
+            synchronized (this) {
+                while (paused) {
+                    try {
+                        wait();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(EventSimulationEngine.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                Event currentEvent = timeline.nextEvent();
+                currentTime = currentEvent.getTime();
+                currentEvent.execute(parameters, statistics, randoms);
+                notifyListeners(currentEvent);
+            }
         }
     }
 
@@ -69,8 +88,41 @@ public abstract class EventSimulationEngine implements SimulationEngine {
         }
     }
 
-    protected double getCurrentTime() {
+    public double getCurrentTime() {
         return currentTime;
+    }
+
+    public void notifyListeners(Event event) {
+        for (EventListener listener : listeners) {
+            listener.onEvent(event, this);
+        }
+    }
+
+    public void setPaused(boolean paused) {
+        boolean wasPaused = this.paused;
+        this.paused = paused;
+        if (!paused && wasPaused) {
+            synchronized (this) {
+                notify(); //NOTE: wake up main loop
+            }
+        }
+
+    }
+
+    public void synchronizeSpeed(double timeInterval, long delayInterval) {
+        if (syncroEvent == null) {
+            this.plan(new SynchronizationEvent(currentTime + timeInterval, this, timeInterval, delayInterval), currentTime + timeInterval);
+        } else {
+            syncroEvent.setDelayInterval(delayInterval);
+            syncroEvent.setPlanningInterval(timeInterval);
+        }
+    }
+
+    public void stopSpeedSynchronization() {
+        if (syncroEvent != null) {
+            syncroEvent.setPlan(false);
+            syncroEvent = null;
+        }
     }
 
 }

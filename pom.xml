@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>sk.uniza.fri.hlavna2</groupId>
     <artifactId>simulation-core</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.1</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>sk.uniza.fri.hlavna2</groupId>
             <artifactId>mh-commons</artifactId>
-            <version>1.6.0</version>
+            <version>1.8.0</version>
         </dependency>
     </dependencies>
 </project>

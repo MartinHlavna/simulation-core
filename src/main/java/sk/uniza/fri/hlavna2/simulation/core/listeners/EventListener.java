@@ -23,16 +23,14 @@
  */
 package sk.uniza.fri.hlavna2.simulation.core.listeners;
 
-import sk.uniza.fri.hlavna2.simulation.core.Statistics;
+import sk.uniza.fri.hlavna2.simulation.core.event.Event;
+import sk.uniza.fri.hlavna2.simulation.core.event.EventSimulationEngine;
 
 /**
  *
- * @author Martin Hlavňa {@literal <mato.hlavna@gmail.com>}
+ * @author Martin Hlavňa <mato.hlavna@gmail.com>
  */
-public interface SimulationProgressListener {
+public interface EventListener {
 
-    void replicationEnded(int number, Statistics statistics);
-
-    void simulationEnded(Statistics statistics);
-
+    void onEvent(Event event, EventSimulationEngine engine);
 }

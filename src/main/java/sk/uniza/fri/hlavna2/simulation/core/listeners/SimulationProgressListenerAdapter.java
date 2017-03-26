@@ -34,9 +34,4 @@ public class SimulationProgressListenerAdapter implements SimulationProgressList
     @Override
     public void simulationEnded(Statistics statistics) {
     }
-
-    @Override
-    public void simulationProgress() {
-    }
-
 }

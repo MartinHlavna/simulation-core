@@ -28,7 +28,7 @@ import sk.uniza.fri.hlavna2.simulation.core.event.EventSimulationEngine;
 
 /**
  *
- * @author Martin Hlavňa <mato.hlavna@gmail.com>
+ * @author Martin Hlavňa {@literal <mato.hlavna@gmail.com>}
  */
 public interface EventListener {
 

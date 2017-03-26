@@ -25,7 +25,7 @@ package sk.uniza.fri.hlavna2.simulation.core.utils;
 
 /**
  *
- * @author Martin Hlavňa <mato.hlavna@gmail.com>
+ * @author Martin Hlavňa {@literal <mato.hlavna@gmail.com>}
  * @param <T>
  */
 public abstract class Statistic<T extends Number> {

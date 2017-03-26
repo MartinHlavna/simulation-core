@@ -55,7 +55,7 @@ public class ReplicationEngine {
     /**
      * Register new progress liustener
      *
-     * @param listener
+     * @param listener Listener to register
      */
     public void addProgressListener(SimulationProgressListener listener) {
         listeners.add(listener);
@@ -64,7 +64,7 @@ public class ReplicationEngine {
     /**
      * Deregister prevoiusly registered progress listener
      *
-     * @param listener
+     * @param listener Listener to remove
      */
     public void removeProgressListener(SimulationProgressListener listener) {
         listeners.remove(listener);

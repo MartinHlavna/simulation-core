@@ -27,7 +27,7 @@ import java.math.BigInteger;
 
 /**
  *
- * @author Martin Hlavňa <mato.hlavna@gmail.com>
+ * @author Martin Hlavňa {@literal <mato.hlavna@gmail.com>}
  * @param <T>
  */
 public class DiscreteStatistics<T extends Number> extends Statistic<T> {

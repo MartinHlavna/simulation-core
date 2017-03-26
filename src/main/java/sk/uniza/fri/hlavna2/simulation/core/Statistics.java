@@ -42,7 +42,7 @@ public class Statistics {
     /**
      * Get number of runned iterations
      *
-     * @return
+     * @return Number of the iterations that have runned
      */
     public int getIterationsRunned() {
         return iterationsRunned;
@@ -51,7 +51,7 @@ public class Statistics {
     /**
      * Set number of runned iterations
      *
-     * @param iterationsRunned
+     * @param iterationsRunned Number of iterations that have runned
      */
     public void setIterationsRunned(int iterationsRunned) {
         this.iterationsRunned = iterationsRunned;

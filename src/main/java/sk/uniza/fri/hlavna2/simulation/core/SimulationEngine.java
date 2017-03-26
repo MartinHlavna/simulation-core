@@ -35,9 +35,9 @@ public interface SimulationEngine {
     /**
      * Simulate one replication. All Random generators registered in the init phase are suplied in the randoms parameter
      *
-     * @param parameters
-     * @param statistics
-     * @param randoms
+     * @param parameters Parameters of the simulation
+     * @param statistics Statistics for the simulation
+     * @param randoms Randoms used in this simulation
      */
     void simulate(SimulationParameters parameters, Statistics statistics, RandomStorage randoms);
 

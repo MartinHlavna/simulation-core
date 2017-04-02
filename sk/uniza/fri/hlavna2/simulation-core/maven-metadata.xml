@@ -3,10 +3,10 @@
   <groupId>sk.uniza.fri.hlavna2</groupId>
   <artifactId>simulation-core</artifactId>
   <versioning>
-    <release>0.3.0</release>
+    <release>1.0.0</release>
     <versions>
-      <version>0.3.0</version>
+      <version>1.0.0</version>
     </versions>
-    <lastUpdated>20170329161600</lastUpdated>
+    <lastUpdated>20170402104231</lastUpdated>
   </versioning>
 </metadata>
